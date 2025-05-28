@@ -49,7 +49,7 @@ function App() {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
-      const json = await response.json()
+      const json = await response.json();
       setData(json);
     } catch (error) {
       setError(true);
@@ -138,35 +138,39 @@ function App() {
         </div>
 
         <div className="users-list">
-          <h1>Users: {data ? data.length : 0}</h1> {
-            data && (
-              <ul>
-                {
-                  data.map(user => {
-                    return (
-                      <li key={user.id}>
-                        {editingId === user.id ? (
-                          <>
-                            <input type="text" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} />
-                            <button onClick={() => updateUser(user.id)}>Save</button>
-                            <button onClick={() => setEditingId(null)}>Cancel</button>
-                          </>) : (
-                          <>
-                            {user.name ? user.name : user.title}
-                            <button onClick={() => {
-                              setEditingId(user.id);
-                              setEditTitle(user.title);
-                            }}>Edit</button>
-                            <button onClick={() => deleteUser(user.id)}>Delete</button>
-                          </>
-                        )}
-                      </li>
-                    )
-                  })
-                }
-              </ul>
-            )
-          }
+          <h1>Users: {data ? data.length : 0}</h1>
+
+          <div className="main-ul">
+            {
+              data && (
+                <ul className='ul-list'>
+                  {
+                    data.map(user => {
+                      return (
+                        <li key={user.id}>
+                          {editingId === user.id ? (
+                            <>
+                              <input type="text" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} />
+                              <button onClick={() => updateUser(user.id)}>Save</button>
+                              <button onClick={() => setEditingId(null)}>Cancel</button>
+                            </>) : (
+                            <>
+                              {<h1>{user.name}</h1> ? <h1>{user.name}</h1> : <h1>{user.title}</h1>}
+                              <button className='edit-btn' onClick={() => {
+                                setEditingId(user.id);
+                                setEditTitle(user.title);
+                              }}>Edit</button>
+                              <button className='delete-btn' onClick={() => deleteUser(user.id)}>Delete</button>
+                            </>
+                          )}
+                        </li>
+                      )
+                    })
+                  }
+                </ul>
+              )
+            }
+          </div>
         </div>
 
       </div>
