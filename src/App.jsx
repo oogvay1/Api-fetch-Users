@@ -154,7 +154,7 @@ function App() {
                               <button onClick={() => setEditingId(null)}>Cancel</button>
                             </>) : (
                             <>
-                              {user.name ? user.name : user.title}
+                              {<h1>{user.name}</h1> ? <h1>{user.name}</h1> : <h1>{user.title}</h1>}
                               <button className='edit-btn' onClick={() => {
                                 setEditingId(user.id);
                                 setEditTitle(user.title);
