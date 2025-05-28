@@ -1,0 +1,115 @@
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove arrows in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+
+.Modal {
+  width: 450px;
+  height: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  flex-direction: column;
+  background-color: #2a2a2e;
+}
+
+.Modal::before {
+  --angle: 0deg;
+  content: '';
+  position: absolute;
+  width: 461px;
+  height: 561px;
+  border-radius: 14px;
+  z-index: -1;
+  background-image: conic-gradient(from var(--angle),
+      #ff00cc,
+      #cc00ff,
+      #00ccff,
+      #6600ff,
+      #ff00cc);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  filter: blur(1px);
+  background-color: aliceblue;
+  animation: colorRotate 2s linear infinite;
+  box-shadow: 0 0 24px -10px rgba(255, 105, 180, 0.5);
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 350px;
+  height: 40px;
+}
+
+input[type="radio"] {
+  width: 30px;
+  height: 30px;
+  display: none;
+}
+
+.radio {
+  width: 350px;
+  display: flex;
+  user-select: none;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.radio div {
+  width: 160px;
+  height: 90px;
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: #141414;
+  transition: all .1s ease-in-out;
+}
+
+.radio div:hover {
+  scale: 1.02;
+  background-color: #101010;
+}
+
+.radio div:active {
+  scale: .98;
+}
+
+.radio div h1 {
+  width: 160px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes colorRotate {
+  from {
+    --angle: 0deg;
+  }
+
+  to {
+    --angle: 360deg;
+  }
+}

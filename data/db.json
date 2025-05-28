@@ -1,0 +1,264 @@
+{
+  "Users": [
+    {
+      "id": "2",
+      "name": "Oybek",
+      "lastname": "Bekmirzayev",
+      "age": 19,
+      "gender": "male",
+      "isDeveloper": true,
+      "country": "Russia"
+    },
+    {
+      "id": "3",
+      "name": "Sabrina",
+      "lastname": "Ivanova",
+      "age": 24,
+      "gender": "female",
+      "isDeveloper": false,
+      "country": "Ukraine"
+    },
+    {
+      "id": "4",
+      "name": "Jasur",
+      "lastname": "Tashkentov",
+      "age": 21,
+      "gender": "male",
+      "isDeveloper": true,
+      "country": "Uzbekistan"
+    },
+    {
+      "id": "5",
+      "name": "Madina",
+      "lastname": "Sharipova",
+      "age": 22,
+      "gender": "female",
+      "isDeveloper": false,
+      "country": "Kazakhstan"
+    },
+    {
+      "id": "6",
+      "name": "Ali",
+      "lastname": "Rahmatov",
+      "age": 25,
+      "gender": "male",
+      "isDeveloper": true,
+      "country": "Turkey"
+    },
+    {
+      "id": "7",
+      "name": "Laylo",
+      "lastname": "Nazarova",
+      "age": 23,
+      "gender": "female",
+      "isDeveloper": true,
+      "country": "Uzbekistan"
+    },
+    {
+      "id": "8",
+      "name": "Sardor",
+      "lastname": "Kurbanov",
+      "age": 26,
+      "gender": "male",
+      "isDeveloper": true,
+      "country": "Kyrgyzstan"
+    },
+    {
+      "id": "9",
+      "name": "Zarina",
+      "lastname": "Kamilova",
+      "age": 20,
+      "gender": "female",
+      "isDeveloper": false,
+      "country": "Tajikistan"
+    },
+    {
+      "id": "10",
+      "name": "Bekzod",
+      "lastname": "Abdullaev",
+      "age": 28,
+      "gender": "male",
+      "isDeveloper": true,
+      "country": "Russia"
+    },
+    {
+      "id": "11",
+      "name": "Malika",
+      "lastname": "Sattorova",
+      "age": 24,
+      "gender": "female",
+      "isDeveloper": true,
+      "country": "Uzbekistan"
+    },
+    {
+      "id": "12",
+      "name": "Shakhzod",
+      "lastname": "Nurmatov",
+      "age": 22,
+      "gender": "male",
+      "isDeveloper": true,
+      "country": "Kazakhstan"
+    },
+    {
+      "id": "13",
+      "name": "Alina",
+      "lastname": "Petrova",
+      "age": 30,
+      "gender": "female",
+      "isDeveloper": false,
+      "country": "Russia"
+    },
+    {
+      "id": "14",
+      "name": "Islom",
+      "lastname": "Rakhimov",
+      "age": 21,
+      "gender": "male",
+      "isDeveloper": true,
+      "country": "Uzbekistan"
+    },
+    {
+      "id": "15",
+      "name": "Nodira",
+      "lastname": "Akhmedova",
+      "age": 27,
+      "gender": "female",
+      "isDeveloper": true,
+      "country": "Uzbekistan"
+    },
+    {
+      "id": "16",
+      "name": "Murod",
+      "lastname": "Kasimov",
+      "age": 19,
+      "gender": "male",
+      "isDeveloper": false,
+      "country": "Turkey"
+    },
+    {
+      "id": "17",
+      "name": "Dilnoza",
+      "lastname": "Karimova",
+      "age": 23,
+      "gender": "female",
+      "isDeveloper": true,
+      "country": "Uzbekistan"
+    },
+    {
+      "id": "18",
+      "name": "Eldor",
+      "lastname": "Turgunov",
+      "age": 25,
+      "gender": "male",
+      "isDeveloper": true,
+      "country": "Kyrgyzstan"
+    },
+    {
+      "id": "19",
+      "name": "Gulnoza",
+      "lastname": "Saidova",
+      "age": 22,
+      "gender": "female",
+      "isDeveloper": false,
+      "country": "Kazakhstan"
+    },
+    {
+      "id": "20",
+      "name": "Kamol",
+      "lastname": "Sattorov",
+      "age": 28,
+      "gender": "male",
+      "isDeveloper": true,
+      "country": "Uzbekistan"
+    },
+    {
+      "id": "21",
+      "name": "Yulduz",
+      "lastname": "Sultanova",
+      "age": 26,
+      "gender": "female",
+      "isDeveloper": true,
+      "country": "Uzbekistan"
+    },
+    {
+      "id": "22",
+      "name": "Nurmuhammad",
+      "lastname": "Iskandarov",
+      "age": 20,
+      "gender": "male",
+      "isDeveloper": true,
+      "country": "Russia"
+    },
+    {
+      "id": "23",
+      "name": "Dilorom",
+      "lastname": "Aminova",
+      "age": 29,
+      "gender": "female",
+      "isDeveloper": false,
+      "country": "Uzbekistan"
+    },
+    {
+      "id": "24",
+      "name": "Shoxruz",
+      "lastname": "Xasanov",
+      "age": 24,
+      "gender": "male",
+      "isDeveloper": true,
+      "country": "Uzbekistan"
+    },
+    {
+      "id": "25",
+      "name": "Nozima",
+      "lastname": "Juraeva",
+      "age": 27,
+      "gender": "female",
+      "isDeveloper": true,
+      "country": "Kazakhstan"
+    },
+    {
+      "id": "26",
+      "name": "Baxrom",
+      "lastname": "Saidov",
+      "age": 30,
+      "gender": "male",
+      "isDeveloper": false,
+      "country": "Kyrgyzstan"
+    },
+    {
+      "id": "27",
+      "name": "Feruza",
+      "lastname": "Nasriddinova",
+      "age": 21,
+      "gender": "female",
+      "isDeveloper": true,
+      "country": "Uzbekistan"
+    },
+    {
+      "id": "28",
+      "name": "Rustam",
+      "lastname": "Yakubov",
+      "age": 26,
+      "gender": "male",
+      "isDeveloper": true,
+      "country": "Russia"
+    },
+    {
+      "id": "29",
+      "name": "Sabina",
+      "lastname": "Rashidova",
+      "age": 19,
+      "gender": "female",
+      "isDeveloper": false,
+      "country": "Uzbekistan"
+    },
+    {
+      "id": "86d4",
+      "name": "Asilbek",
+      "lastname": "Sattorov",
+      "age": 20,
+      "country": "Uzbekistan",
+      "isDeveloper": "true"
+    }
+  ]
+}
