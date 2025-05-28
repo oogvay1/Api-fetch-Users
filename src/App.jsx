@@ -129,6 +129,7 @@ function App() {
             <h1>Change Api:</h1>
             <input className='change-input' type="text" placeholder='New Url' value={apiUrl} onChange={(e) => setApiUrl(e.target.value)} />
             <button onClick={() => handleChange(apiUrl)}>Change</button>
+            <input type="text" />
           </div>
           <div className="add-user">
             <h1>Add user:</h1>
