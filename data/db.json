@@ -1,13 +1,8 @@
 {
   "Users": [
     {
-      "id": "2",
-      "name": "Oybek",
-      "lastname": "Bekmirzayev",
-      "age": 19,
-      "gender": "male",
-      "isDeveloper": true,
-      "country": "Russia"
+      "name": "fgerg",
+      "id": "2"
     },
     {
       "id": "3",
