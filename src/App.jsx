@@ -13,6 +13,14 @@ function App() {
   let [editingId, setEditingId] = useState(null);
   let [apiUrl, setApiUrl] = useState('http://localhost:8080/Users');
   let [esc, setEsc] = useState(false);
+  let [edit, setEdit] = useState({
+    name: '',
+    lastname: '',
+    age: '',
+    gender: '',
+    country: '',
+    isDeveloper: false,
+  });
 
   let [form, setForm] = useState({
     name: '',
@@ -75,10 +83,12 @@ function App() {
     setEsc(false)
     if (objectEmpty) return;
 
+    const { name, lastname, age, country, isDeveloper } = form;
+
     const res = await fetch(url, {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: form.name, lastname: form.lastname, age: form.age, country: form.country, isDeveloper: form.isDeveloper })
+      body: JSON.stringify({ name, lastname, age, country, isDeveloper })
     });
     const user = await res.json();
 
@@ -92,14 +102,15 @@ function App() {
   }
 
   const updateUser = async (id) => {
+
     const res = await fetch(`${url}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: editTitle })
     });
     const update = await res.json();
-    setData(prev => prev.map(user => user.id === id ? update : user));
 
+    setData(prev => prev.map(user => user.id === id ? update : user));
     setEditTitle('');
     setEditingId(null);
   }
@@ -116,6 +127,35 @@ function App() {
     return <p>Error: {error.message}</p>
   }
 
+  editingId && console.log(editingId)
+
+
+  useEffect(() => {
+    const defineUser = async () => {
+      if (!editingId) return;
+
+      try {
+        const res = await fetch(`${url}/${editingId}`);
+        const data = await res.json();
+
+        const newEdit = {
+          name: data.name,
+          lastname: data.lastname,
+          age: data.age,
+          gender: data.gender,
+          country: data.country,
+          isDeveloper: data.isDeveloper
+        };
+
+        setEdit(newEdit);
+        console.log("Fetched and set user:", newEdit); // ✅ Works
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    defineUser();
+  }, [editTitle && editingId, url]);
 
   return (
     <>
@@ -129,7 +169,6 @@ function App() {
             <h1>Change Api:</h1>
             <input className='change-input' type="text" placeholder='New Url' value={apiUrl} onChange={(e) => setApiUrl(e.target.value)} />
             <button onClick={() => handleChange(apiUrl)}>Change</button>
-            <input type="text" />
           </div>
           <div className="add-user">
             <h1>Add user:</h1>
@@ -145,24 +184,18 @@ function App() {
               data && (
                 <ul className='ul-list'>
                   {
-                    data.map(user => {
+                    data.map((user, index) => {
                       return (
-                        <li key={user.id}>
-                          {editingId === user.id ? (
-                            <>
-                              <input type="text" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} />
-                              <button onClick={() => updateUser(user.id)}>Save</button>
-                              <button onClick={() => setEditingId(null)}>Cancel</button>
-                            </>) : (
-                            <>
-                              {<h1>{user.name}</h1> ? <h1>{user.name}</h1> : <h1>{user.title}</h1>}
-                              <button className='edit-btn' onClick={() => {
-                                setEditingId(user.id);
-                                setEditTitle(user.title);
-                              }}>Edit</button>
-                              <button className='delete-btn' onClick={() => deleteUser(user.id)}>Delete</button>
-                            </>
-                          )}
+                        <li key={user.id || index}>
+                          <>
+                            {<h1>{user.name || user.title}</h1>}
+                            <button className='edit-btn' onClick={() => {
+                              setEditingId(user.id);
+                              setEditTitle(user.title);
+                              <Modal form={form} addUser={updateUser} />
+                            }}>Edit<i className="ri-pencil-fill"></i></button>
+                            <button className='delete-btn' onClick={() => deleteUser(user.id)}>Delete</button>
+                          </>
                         </li>
                       )
                     })

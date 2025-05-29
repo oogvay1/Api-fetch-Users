@@ -158,15 +158,6 @@
       "country": "Kazakhstan"
     },
     {
-      "id": "20",
-      "name": "Kamol",
-      "lastname": "Sattorov",
-      "age": 28,
-      "gender": "male",
-      "isDeveloper": true,
-      "country": "Uzbekistan"
-    },
-    {
       "id": "21",
       "name": "Yulduz",
       "lastname": "Sultanova",
@@ -210,50 +201,6 @@
       "gender": "female",
       "isDeveloper": true,
       "country": "Kazakhstan"
-    },
-    {
-      "id": "26",
-      "name": "Baxrom",
-      "lastname": "Saidov",
-      "age": 30,
-      "gender": "male",
-      "isDeveloper": false,
-      "country": "Kyrgyzstan"
-    },
-    {
-      "id": "27",
-      "name": "Feruza",
-      "lastname": "Nasriddinova",
-      "age": 21,
-      "gender": "female",
-      "isDeveloper": true,
-      "country": "Uzbekistan"
-    },
-    {
-      "id": "28",
-      "name": "Rustam",
-      "lastname": "Yakubov",
-      "age": 26,
-      "gender": "male",
-      "isDeveloper": true,
-      "country": "Russia"
-    },
-    {
-      "id": "29",
-      "name": "Sabina",
-      "lastname": "Rashidova",
-      "age": 19,
-      "gender": "female",
-      "isDeveloper": false,
-      "country": "Uzbekistan"
-    },
-    {
-      "id": "86d4",
-      "name": "Asilbek",
-      "lastname": "Sattorov",
-      "age": 20,
-      "country": "Uzbekistan",
-      "isDeveloper": "true"
     }
   ]
 }

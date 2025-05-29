@@ -13,9 +13,9 @@ body {
 }
 
 .container {
-    max-width: 1500px;
-    margin: 0 auto;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 .main-header {
@@ -23,13 +23,16 @@ body {
     justify-content: space-between;
     align-items: center;
     height: 110px;
+    max-width: 1500px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .change-url {
     width: 8000px;
     height: 60px;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     gap: 40px;
 }
@@ -72,15 +75,27 @@ body {
     height: 50px;
 }
 
+.users-list {
+    max-width: 1600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
 .delete-btn {
     width: 140px;
     height: 50px;
     border: none;
     border-radius: 10px;
-    background: linear-gradient(to right, 
-        crimson,
-        black
-    );
+    background: linear-gradient(to right,
+            crimson,
+            black);
+    flex: 0;
+    padding: 0 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: #f0f0f0;
     box-shadow: 0px 0px 30px -8px red;
 }
 
@@ -88,22 +103,89 @@ body {
     display: flex;
     justify-content: end;
     align-content: end;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .ul-list {
     width: 600px;
+    height: 620px;
+    overflow-y: scroll;
     display: flex;
     justify-content: center;
-    align-items: end;
-    flex-direction: column;
-    box-shadow: inset 0 0 20px black;
+    align-items: center;
+    padding: 26px;
+    gap: 21px;
+    border-radius: 14px;
+    flex-direction: column-reverse;
+    box-shadow: inset 0 0 100px rgb(0, 0, 0);
 }
 
 li {
-    width: 700px;
+    width: 500px;
     display: flex;
-    justify-content: space-between;
+    gap: 0px;
     align-items: center;
 }
 
-li 
+li h1 {
+    flex: 1;
+}
+
+.edit-btn {
+    width: 200px;
+    flex: .5;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: baseline;
+    padding-top: 10px;
+    gap: 10px;
+    margin-right: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    transition: all .1s ease-in-out;
+}
+
+.edit-btn:hover {
+    scale: 1.02;
+}
+
+.edit-btn::before {
+    content: '';
+    max-width: 70px;
+    width: 0%;
+    height: 2px;
+    margin-top: 27px;
+    position: absolute;
+    background-color: #555;
+    transition: all .2s ease-in-out;
+}
+
+.edit-btn:hover::before {
+    width: 100%;
+}
+
+.edit-btn:active {
+    scale: 0.98;
+}
+
+.edit-btn i {
+    font-size: 27px;
+}
+
+.ul-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.ul-list::-webkit-scrollbar-thumb {
+    background-color: #ffffff00;
+    border-radius: 4px;
+}
+
+.ul-list::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
