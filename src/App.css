@@ -10,6 +10,12 @@
 body {
     background-color: #121212;
     color: #f0f0f0;
+    scroll-behavior: smooth;
+}
+
+html {
+    overflow: hidden;
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -29,8 +35,8 @@ body {
 }
 
 .change-url {
-    width: 8000px;
-    height: 60px;
+    width: 800px;
+    height: 600px;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -96,7 +102,17 @@ body {
     align-items: center;
     font-size: 20px;
     color: #f0f0f0;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
     box-shadow: 0px 0px 30px -8px red;
+}
+
+.delete-btn:hover {
+    scale: 1.05;
+}
+
+.delete-btn:active {
+    scale: .98;
 }
 
 .main-ul {
@@ -105,6 +121,7 @@ body {
     align-content: end;
     border-radius: 12px;
     overflow: hidden;
+    position: sticky;
 }
 
 .ul-list {
@@ -112,29 +129,60 @@ body {
     height: 620px;
     overflow-y: scroll;
     display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 26px;
     gap: 21px;
+    scroll-behavior: smooth;
     border-radius: 14px;
-    flex-direction: column-reverse;
+    flex-direction: column;
     box-shadow: inset 0 0 100px rgb(0, 0, 0);
 }
 
 li {
-    width: 500px;
+    width: 100%;
     display: flex;
-    gap: 0px;
     align-items: center;
+    padding: 14px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: all .1s ease-in-out;
+    background-color: #9494949d;
+    animation: scaleIn 1s ease-out both;
+    animation-timeline: view();
+    animation-range: entry 0% leave 100%;
+}
+
+li:hover {
+    scale: 1.02;
 }
 
 li h1 {
     flex: 1;
+    font-size: 17px;
+}
+
+.scroll-watcher {
+    position: fixed;
+    width: 595px;
+    height: 5px;
+    z-index: 9999;
+    scale: 0 1;
+    transform-origin: left;
+    border-radius: 50px 0px 0px 0px;
+    margin-left: -1.6rem;
+    background-color: red;
+    animation: scroll-watcherr linear;
+    animation-timeline: scroll();
+}
+
+@keyframes scroll-watcherr {
+    100% {
+        scale: 1 1;
+    }
 }
 
 .edit-btn {
     width: 200px;
-    flex: .5;
+    flex: .4;
     display: flex;
     flex-grow: 1;
     justify-content: center;
@@ -178,7 +226,7 @@ li h1 {
 }
 
 .ul-list::-webkit-scrollbar {
-    width: 6px;
+    width: .001px;
 }
 
 .ul-list::-webkit-scrollbar-thumb {
@@ -186,6 +234,19 @@ li h1 {
     border-radius: 4px;
 }
 
-.ul-list::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
+@keyframes scaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.84);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0.4;
+        transform: scale(0.84);
+    }
 }

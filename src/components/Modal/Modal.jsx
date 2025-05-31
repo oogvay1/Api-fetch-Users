@@ -22,11 +22,11 @@ function Modal({ form, addUser, handle, setEsc }) {
 
     return (
         <div className="modal" ref={modalRef} >
-            <form>
+            <form onSubmit={(e) => { e.preventDefault(); addUser }}>
                 <div className="Modal">
                     <label>
                         <h1>Name:</h1>
-                        <input type="text" name="name" placeholder="Name.." value={form.name} onChange={handle} autoComplete='off' required />
+                        <input type="text" name="name" placeholder="Name.." value={form.name || form.title} onChange={handle} autoComplete='off' required />
                     </label>
                     <label>
                         <h1>Lastname:</h1>
@@ -63,14 +63,14 @@ function Modal({ form, addUser, handle, setEsc }) {
                         <div className="radio">
                             <div>
                                 <label>
-                                    <h1>True</h1>required 
-                                    <input type="radio" name="isDeveloper" checked={form.isDeveloper === 'true'} value={"true"} onChange={handle} />
+                                    <h1>True</h1>
+                                    <input type="radio" name="isDeveloper" checked={form.isDeveloper === true} value={"true"} onChange={handle} />
                                 </label>
                             </div>
                             <div>
                                 <label>
                                     <h1>False</h1>
-                                    <input type="radio" name="isDeveloper" checked={form.isDeveloper === 'false'} value={"false"} onChange={handle} />
+                                    <input type="radio" name="isDeveloper" checked={form.isDeveloper === false} value={"false"} onChange={handle} />
                                 </label>
                             </div>
                         </div>

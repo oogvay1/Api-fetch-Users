@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react'
+import { useCallback, useState, useEffect, useRef } from 'react'
 import './App.css'
 import Loader from './components/Loader/Loader';
 import Modal from './components/Modal/Modal';
@@ -13,17 +13,11 @@ function App() {
   let [editingId, setEditingId] = useState(null);
   let [apiUrl, setApiUrl] = useState('http://localhost:8080/Users');
   let [esc, setEsc] = useState(false);
-  let [edit, setEdit] = useState({
-    name: '',
-    lastname: '',
-    age: '',
-    gender: '',
-    country: '',
-    isDeveloper: false,
-  });
+  let [edit, setEdit] = useState(null);
 
   let [form, setForm] = useState({
     name: '',
+    title: '',
     lastname: '',
     age: '',
     gender: '',
@@ -33,12 +27,27 @@ function App() {
 
   let newUserr = {
     name: '',
+    title: '',
     lastname: '',
     age: '',
     gender: '',
     country: '',
     isDeveloper: false,
   }
+
+  useEffect(() => {
+    const modalClose = (e) => {
+      if (e.key == "Escape") {
+        setEsc(false);
+      }
+    }
+
+    window.addEventListener('keydown', modalClose)
+
+    return () => {
+      window.removeEventListener('keydown', modalClose)
+    }
+  }, [esc])
 
   const handleForm = (e) => {
     const { name, value, type } = e.target;
@@ -130,39 +139,34 @@ function App() {
   editingId && console.log(editingId)
 
 
-  useEffect(() => {
-    const defineUser = async () => {
-      if (!editingId) return;
+  const defineUser = async (id) => {
+    if (!id) return;
 
-      try {
-        const res = await fetch(`${url}/${editingId}`);
-        const data = await res.json();
+    const res = await fetch(`${url}/${id}`);
+    const data = await res.json();
 
-        const newEdit = {
-          name: data.name,
-          lastname: data.lastname,
-          age: data.age,
-          gender: data.gender,
-          country: data.country,
-          isDeveloper: data.isDeveloper
-        };
-
-        setEdit(newEdit);
-        console.log("Fetched and set user:", newEdit); // ✅ Works
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      }
+    const newEdit = {
+      id: data.id,
+      name: data.name,
+      title: data.title,
+      lastname: data.lastname,
+      age: data.age,
+      gender: data.gender,
+      country: data.country,
+      isDeveloper: data.isDeveloper
     };
 
-    defineUser();
-  }, [editTitle && editingId, url]);
+    setEdit(newEdit);
+    console.log(id)
+  };
 
   return (
     <>
       {esc && <Modal form={form} setEsc={() => setEsc(false)} addUser={addUser} handle={handleForm} />}
 
-      <div className="container">
+      {edit && <Modal form={edit} addUser={updateUser} setEsc={() => setEsc(false)} handle={handleChange} />}
 
+      <div className="container">
 
         <div className="main-header">
           <div className="change-url">
@@ -177,22 +181,22 @@ function App() {
         </div>
 
         <div className="users-list">
-          <h1>Users: {data ? data.length : 0}</h1>
 
+          <h1>Users: {data ? data.length : 0}</h1>
           <div className="main-ul">
             {
               data && (
-                <ul className='ul-list'>
+                <ul data-lenis-prevent id="scroll-target" className='ul-list'>
                   {
                     data.map((user, index) => {
                       return (
                         <li key={user.id || index}>
                           <>
-                            {<h1>{user.name || user.title}</h1>}
+                            {<h1>{user.name ? user.name : user.title}</h1>}
                             <button className='edit-btn' onClick={() => {
-                              setEditingId(user.id);
+                              defineUser(user.id);
                               setEditTitle(user.title);
-                              <Modal form={form} addUser={updateUser} />
+                              setEsc(true);
                             }}>Edit<i className="ri-pencil-fill"></i></button>
                             <button className='delete-btn' onClick={() => deleteUser(user.id)}>Delete</button>
                           </>
