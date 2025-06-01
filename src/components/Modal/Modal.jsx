@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import './Modal.css'
 
-function Modal({ form, addUser, handle, setEsc }) {
+function Modal({ form, addUser, updateUser, handle, setEsc, editingId }) {
 
     let modalRef = useRef(null);
 
@@ -22,7 +22,7 @@ function Modal({ form, addUser, handle, setEsc }) {
 
     return (
         <div className="modal" ref={modalRef} >
-            <form onSubmit={(e) => { e.preventDefault(); addUser }}>
+            <form onSubmit={(e) => { e.preventDefault(); editingId ? updateUser(editingId) : addUser(); }}>
                 <div className="Modal">
                     <label>
                         <h1>Name:</h1>
@@ -64,18 +64,18 @@ function Modal({ form, addUser, handle, setEsc }) {
                             <div>
                                 <label>
                                     <h1>True</h1>
-                                    <input type="radio" name="isDeveloper" checked={form.isDeveloper === true} value={"true"} onChange={handle} />
+                                    <input type="checkbox" name="isDeveloper" checked={form.isDeveloper} value={true} onChange={handle} />
                                 </label>
                             </div>
                             <div>
                                 <label>
                                     <h1>False</h1>
-                                    <input type="radio" name="isDeveloper" checked={form.isDeveloper === false} value={"false"} onChange={handle} />
+                                    <input type="checkbox" name="isDeveloper" checked={form.isDeveloper} value={false} onChange={handle} />
                                 </label>
                             </div>
                         </div>
                     </label>
-                    <button onClick={addUser}>Add</button>
+                    <button type="submit">{editingId ? "Update User" : "Add User"}</button>
                 </div>
             </form>
         </div>

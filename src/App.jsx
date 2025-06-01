@@ -2,6 +2,17 @@ import { useCallback, useState, useEffect, useRef } from 'react'
 import './App.css'
 import Loader from './components/Loader/Loader';
 import Modal from './components/Modal/Modal';
+import UserInfo from './components/UserInfo';
+
+let newUserr = {
+  name: '',
+  title: '',
+  lastname: '',
+  age: '',
+  gender: '',
+  country: '',
+  isDeveloper: false,
+}
 
 function App() {
 
@@ -9,13 +20,14 @@ function App() {
   let [data, setData] = useState(null);
   let [error, setError] = useState(false);
   let [load, setLoad] = useState(false);
-  let [editTitle, setEditTitle] = useState('');
   let [editingId, setEditingId] = useState(null);
   let [apiUrl, setApiUrl] = useState('http://localhost:8080/Users');
   let [esc, setEsc] = useState(false);
-  let [edit, setEdit] = useState(null);
+  let [loadi, setLoadi] = useState(true);
+
 
   let [form, setForm] = useState({
+    id: 0,
     name: '',
     title: '',
     lastname: '',
@@ -25,15 +37,7 @@ function App() {
     isDeveloper: false,
   });
 
-  let newUserr = {
-    name: '',
-    title: '',
-    lastname: '',
-    age: '',
-    gender: '',
-    country: '',
-    isDeveloper: false,
-  }
+  let [info, setInfo] = useState(newUserr);
 
   useEffect(() => {
     const modalClose = (e) => {
@@ -50,12 +54,16 @@ function App() {
   }, [esc])
 
   const handleForm = (e) => {
-    const { name, value, type } = e.target;
+    const { name, value, type, checked } = e.target;
+
     setForm(prev => ({
       ...prev,
-      [name]: type === "number" ? + value : value
-    }))
+      [name]: type === "checkbox" ? checked
+        : type === "number" ? +value
+          : value
+    }));
   };
+
 
   const fetchData = useCallback(async () => {
     setError(false);
@@ -111,18 +119,21 @@ function App() {
   }
 
   const updateUser = async (id) => {
-
     const res = await fetch(`${url}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: editTitle })
+      body: JSON.stringify(form),
     });
-    const update = await res.json();
 
-    setData(prev => prev.map(user => user.id === id ? update : user));
-    setEditTitle('');
+    const updatedUser = await res.json();
+
+    findUser(id);
+    setData(prev => prev.map(user => user.id === id ? updatedUser : user));
     setEditingId(null);
-  }
+    setForm(newUserr);
+    setEsc(false);
+  };
+
 
   const handleChange = (newUrl) => {
     setUrl(newUrl);
@@ -136,8 +147,6 @@ function App() {
     return <p>Error: {error.message}</p>
   }
 
-  editingId && console.log(editingId)
-
 
   const defineUser = async (id) => {
     if (!id) return;
@@ -145,72 +154,107 @@ function App() {
     const res = await fetch(`${url}/${id}`);
     const data = await res.json();
 
-    const newEdit = {
-      id: data.id,
-      name: data.name,
-      title: data.title,
-      lastname: data.lastname,
-      age: data.age,
-      gender: data.gender,
-      country: data.country,
-      isDeveloper: data.isDeveloper
-    };
+    setForm({
+      id: data.id || 0,
+      name: data.name || '',
+      title: data.title || '',
+      lastname: data.lastname || '',
+      age: data.age || '',
+      gender: data.gender || '',
+      country: data.country || '',
+      isDeveloper: Boolean(data.isDeveloper) || false,
+    });
 
-    setEdit(newEdit);
-    console.log(id)
+    setEditingId(id);
+    setEsc(true);
   };
+
+  const findUser = async (id) => {
+    if (!id) return;
+
+    const res = await fetch(`${url}/${id}`);
+    const data = await res.json();
+
+    setInfo({
+      id: data.id || 0,
+      name: data.name || 'Azimbek',
+      title: data.title || 'Azimbek',
+      lastname: data.lastname || 'Alibekov',
+      age: data.age || 20,
+      gender: data.gender || 'male',
+      country: data.country || 'Uzbekistan',
+      isDeveloper: Boolean(data.isDeveloper) || true
+    });
+    console.log(data.isDeveloper);
+  };
+
+  info && console.log(info)
 
   return (
     <>
-      {esc && <Modal form={form} setEsc={() => setEsc(false)} addUser={addUser} handle={handleForm} />}
+      {esc && (
+        <Modal
+          form={form}
+          setEsc={() => setEsc(false)}
+          handle={handleForm}
+          addUser={addUser}
+          updateUser={updateUser}
+          editingId={editingId}
+        />
+      )}
 
-      {edit && <Modal form={edit} addUser={updateUser} setEsc={() => setEsc(false)} handle={handleChange} />}
-
-      <div className="container">
-
-        <div className="main-header">
-          <div className="change-url">
-            <h1>Change Api:</h1>
-            <input className='change-input' type="text" placeholder='New Url' value={apiUrl} onChange={(e) => setApiUrl(e.target.value)} />
-            <button onClick={() => handleChange(apiUrl)}>Change</button>
+      <main>
+        <header className="main-header">
+          <div className="header-wrapper">
+            <div className="change-url">
+              <h1>Change Api</h1>
+              <div className="change-button">
+                <input className='change-input' type="text" placeholder='New Url' value={apiUrl} onChange={(e) => setApiUrl(e.target.value)} />
+                <button onClick={() => handleChange(apiUrl)}><i class="ri-arrow-left-right-line"></i></button>
+              </div>
+            </div>
+            <div className="add-user">
+              <h1>Add user:</h1>
+              <button onClick={() => setEsc(true)}>Add new User</button>
+            </div>
           </div>
-          <div className="add-user">
-            <h1>Add user:</h1>
-            <button onClick={() => setEsc(true)}>Add new User</button>
-          </div>
-        </div>
+        </header>
+
 
         <div className="users-list">
+          <UserInfo info={info} load={loadi} />
 
-          <h1>Users: {data ? data.length : 0}</h1>
-          <div className="main-ul">
-            {
-              data && (
-                <ul data-lenis-prevent id="scroll-target" className='ul-list'>
-                  {
-                    data.map((user, index) => {
-                      return (
-                        <li key={user.id || index}>
-                          <>
-                            {<h1>{user.name ? user.name : user.title}</h1>}
-                            <button className='edit-btn' onClick={() => {
-                              defineUser(user.id);
-                              setEditTitle(user.title);
-                              setEsc(true);
-                            }}>Edit<i className="ri-pencil-fill"></i></button>
-                            <button className='delete-btn' onClick={() => deleteUser(user.id)}>Delete</button>
-                          </>
-                        </li>
-                      )
-                    })
-                  }
-                </ul>
-              )
-            }
+          <div className="users-number">
+            <div className="main-ul">
+              {
+                data && (
+                  <ul data-lenis-prevent id="scroll-target" className='ul-list'>
+                    <div className="users-num">
+                      <h1>Users: {data ? data.length : 0}</h1>
+                    </div>
+                    {
+                      data.map((user, index) => {
+                        return (
+                          <li onClick={() => { findUser(user.id); setLoadi(false) }} key={user.id || index}>
+                            <>
+                              {<h1>{user.name ? user.name : user.title}</h1>}
+                              <button className='edit-btn' onClick={() => {
+                                defineUser(user.id);
+                                setEsc(true);
+                              }}>Edit<i className="ri-pencil-fill"></i></button>
+                              <button className='delete-btn' onClick={() => deleteUser(user.id)}>Delete</button>
+                            </>
+                          </li>
+                        )
+                      })
+                    }
+                  </ul>
+                )
+              }
+            </div>
           </div>
         </div>
-
-      </div>
+      </main>
 
     </>
   )
