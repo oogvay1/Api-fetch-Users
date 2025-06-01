@@ -4,7 +4,6 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* Remove arrows in Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
 }
@@ -17,16 +16,43 @@ input[type="number"] {
   width: 100vw;
   position: fixed;
   z-index: 9999;
+  animation: opening .2s ease-in-out forwards;
+}
+
+.modal input {
+  border-radius: 6px;
+  border: none;
+  padding-left: 10px;
+  font-size: 20px;
+  background-color: #101010;
+  box-shadow: inset 0 0 20px black;
+  color: #ffffff;
+}
+
+.modal input::placeholder {
+  color: #fff;
+}
+
+.modal label {
+  font-size: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.checkbox {
+  font-size: 29px;
 }
 
 .Modal {
   width: 450px;
-  height: 550px;
+  height: 590px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 12px;
   flex-direction: column;
+  gap: 10px;
   background-color: #2a2a2e;
 }
 
@@ -35,7 +61,7 @@ input[type="number"] {
   content: '';
   position: absolute;
   width: 461px;
-  height: 561px;
+  height: 600px;
   border-radius: 14px;
   z-index: -1;
   background-image: conic-gradient(from var(--angle),
@@ -74,7 +100,10 @@ input[type="radio"] {
 
 .radio div {
   width: 160px;
-  height: 90px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   border-radius: 10px;
   background-color: #141414;
@@ -99,6 +128,11 @@ input[type="radio"] {
   cursor: pointer;
 }
 
+.gender-h1 {
+  font-size: 15px;
+  margin-bottom: .4rem;
+}
+
 @property --angle {
   syntax: "<angle>";
   initial-value: 0deg;
@@ -112,5 +146,17 @@ input[type="radio"] {
 
   to {
     --angle: 360deg;
+  }
+}
+
+@keyframes opening {
+  from {
+    scale: .9;
+    opacity: 0;
+  }
+
+  to {
+    scale: 1;
+    opacity: 1;
   }
 }

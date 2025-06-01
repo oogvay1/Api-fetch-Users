@@ -4,6 +4,7 @@ import './Modal.css'
 function Modal({ form, addUser, updateUser, handle, setEsc, editingId }) {
 
     let modalRef = useRef(null);
+    let developRef = useRef(null);
 
     useEffect(() => {
         const modalClose = (e) => {
@@ -18,7 +19,17 @@ function Modal({ form, addUser, updateUser, handle, setEsc, editingId }) {
         return () => {
             window.removeEventListener('keydown', modalClose)
         }
-    }, [setEsc])
+    }, [setEsc]);
+
+    useEffect(() => {
+        const developElements = developRef.current.querySeletorAll('.isDevelop');
+
+        developElements.map(el => {
+            el.addEventListener('click', () => {
+                
+            })
+        })
+    }, [])
 
     return (
         <div className="modal" ref={modalRef} >
@@ -37,18 +48,18 @@ function Modal({ form, addUser, updateUser, handle, setEsc, editingId }) {
                         <input type="number" name="age" placeholder="Age" value={form.age} onChange={handle} autoComplete='off' required />
                     </label>
                     <div className="gender">
-                        <h1>Gender:</h1>
+                        <h1 className='gender-h1'>Gender:</h1>
 
                         <div className="radio">
                             <div>
                                 <label>
-                                    <h1>Male</h1>
+                                    <h1 className='checkbox'>Male</h1>
                                     <input type="radio" name="gender" checked={form.gender === 'male'} value={"male"} onChange={handle} />
                                 </label>
                             </div>
                             <div>
                                 <label>
-                                    <h1>Female</h1>
+                                    <h1 className='checkbox'>Female</h1>
                                     <input type="radio" name="gender" checked={form.gender === 'female'} value={"female"} onChange={handle} />
                                 </label>
                             </div>
@@ -63,14 +74,14 @@ function Modal({ form, addUser, updateUser, handle, setEsc, editingId }) {
                         <div className="radio">
                             <div>
                                 <label>
-                                    <h1>True</h1>
-                                    <input type="checkbox" name="isDeveloper" checked={form.isDeveloper} value={true} onChange={handle} />
+                                    <h1 className='checkbox'>True</h1>
+                                    <input ref={developRef} type="checkbox" name="isDeveloper" checked={form.isDeveloper} value={true} onChange={handle} />
                                 </label>
                             </div>
                             <div>
                                 <label>
-                                    <h1>False</h1>
-                                    <input type="checkbox" name="isDeveloper" checked={form.isDeveloper} value={false} onChange={handle} />
+                                    <h1 className='checkbox'>False</h1>
+                                    <input ref={developRef} type="checkbox" name="isDeveloper" checked={form.isDeveloper} value={false} onChange={handle} />
                                 </label>
                             </div>
                         </div>

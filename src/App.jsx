@@ -1,8 +1,9 @@
 import { useCallback, useState, useEffect, useRef } from 'react'
-import './App.css'
+import './App.css';
 import Loader from './components/Loader/Loader';
 import Modal from './components/Modal/Modal';
 import UserInfo from './components/UserInfo';
+import Error from './components/Error/Error';
 
 let newUserr = {
   name: '',
@@ -144,7 +145,23 @@ function App() {
   }
 
   if (error) {
-    return <p>Error: {error.message}</p>
+    return <>
+      <header className="main-header">
+        <div className="header-wrapper">
+          <div className="change-url">
+            <h1>Change Api</h1>
+            <div className="change-button">
+              <input className='change-input' type="text" placeholder='New Url' value={apiUrl} onChange={(e) => setApiUrl(e.target.value)} />
+              <button onClick={() => handleChange(apiUrl)}><i class="ri-arrow-left-right-line"></i></button>
+            </div>
+          </div>
+          <div className="add-user">
+            <h1>Add user:</h1>
+            <button onClick={() => setEsc(true)}>Add new User</button>
+          </div>
+        </div>
+      </header>
+      <Error /></>
   }
 
 
@@ -220,7 +237,6 @@ function App() {
           </div>
         </header>
 
-
         <div className="users-list">
           <UserInfo info={info} load={loadi} />
 
@@ -255,7 +271,6 @@ function App() {
           </div>
         </div>
       </main>
-
     </>
   )
 }
