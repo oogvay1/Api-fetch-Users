@@ -112,7 +112,6 @@ input[type="radio"] {
 
 .radio div:hover {
   scale: 1.02;
-  background-color: #101010;
 }
 
 .radio div:active {

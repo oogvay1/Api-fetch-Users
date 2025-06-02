@@ -72,9 +72,9 @@ function UserInfo({ info, load }) {
                 </div>
             </div>
 
+            {/* <div className="colors"></div>
             <div className="colors"></div>
-            <div className="colors"></div>
-            <div className="colors"></div>
+            <div className="colors"></div> */}
         </section>
     );
 }

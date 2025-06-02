@@ -56,6 +56,7 @@ function App() {
 
   const handleForm = (e) => {
     const { name, value, type, checked } = e.target;
+    const val = type === 'checkbox' ? checked : value;
 
     setForm(prev => ({
       ...prev,
@@ -186,6 +187,10 @@ function App() {
     setEsc(true);
   };
 
+  useEffect(() => {
+    
+  })
+
   const findUser = async (id) => {
     if (!id) return;
 
@@ -200,7 +205,7 @@ function App() {
       age: data.age || 20,
       gender: data.gender || 'male',
       country: data.country || 'Uzbekistan',
-      isDeveloper: Boolean(data.isDeveloper) || true
+      isDeveloper: Boolean(data.isDeveloper)
     });
     console.log(data.isDeveloper);
   };
@@ -217,6 +222,8 @@ function App() {
           addUser={addUser}
           updateUser={updateUser}
           editingId={editingId}
+          setForm={setForm}
+          newForm={newUserr}
         />
       )}
 
@@ -227,7 +234,7 @@ function App() {
               <h1>Change Api</h1>
               <div className="change-button">
                 <input className='change-input' type="text" placeholder='New Url' value={apiUrl} onChange={(e) => setApiUrl(e.target.value)} />
-                <button onClick={() => handleChange(apiUrl)}><i class="ri-arrow-left-right-line"></i></button>
+                <button onClick={() => handleChange(apiUrl)}><i className="ri-arrow-left-right-line"></i></button>
               </div>
             </div>
             <div className="add-user">
