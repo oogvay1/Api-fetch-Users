@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './Modal.css'
 
-function Modal({ form, addUser, updateUser, handle, setEsc, editingId, setForm, newForm }) {
+function Modal({ form, addUser, updateUser, handle, setEsc, editingId, setForm, newForm, setEditingId }) {
 
     let modalRef = useRef(null);
     let genderRef = useRef([]);
@@ -14,6 +14,11 @@ function Modal({ form, addUser, updateUser, handle, setEsc, editingId, setForm, 
                 setForm(newForm);
             }
         }
+
+
+        if (editingId < 0) {
+            setForm(newForm);
+        }
         modalRef.current.style.backdropFilter = 'blur(5px)';
 
         window.addEventListener('keydown', modalClose)
@@ -21,7 +26,7 @@ function Modal({ form, addUser, updateUser, handle, setEsc, editingId, setForm, 
         return () => {
             window.removeEventListener('keydown', modalClose)
         }
-    }, [setEsc]);
+    }, [setEsc, editingId, form.name]);
 
     const changeColor = (index, color) => {
         genderRef.current.forEach((el, i) => {
@@ -71,7 +76,7 @@ function Modal({ form, addUser, updateUser, handle, setEsc, editingId, setForm, 
             setColor(0, '#141414');
             setColor(1, '#141414');
         }
-    }, [editingId])
+    }, [editingId, form.isDeveloper])
 
     return (
         <div className="modal" ref={modalRef} >
@@ -117,13 +122,13 @@ function Modal({ form, addUser, updateUser, handle, setEsc, editingId, setForm, 
                             <div ref={(el) => developRef.current[0] = el} onClick={() => changeColor2(1, '#141414')}>
                                 <label>
                                     <h1 className='checkbox'>True</h1>
-                                    <input className='develop' type="checkbox" name="isDeveloper" checked={form.isDeveloper === true} value={true} onChange={() => handle} />
+                                    <input className='develop' type="checkbox" name="isDeveloper" checked={form.isDeveloper === true} value={true} onChange={handle} />
                                 </label>
                             </div>
                             <div ref={(el) => developRef.current[1] = el} onClick={() => changeColor2(0, '#141414')}>
                                 <label>
                                     <h1 className='checkbox'>False</h1>
-                                    <input className='develop' type="checkbox" name="isDeveloper" checked={form.isDeveloper === false} value={false} onChange={() => handle} />
+                                    <input className='develop' type="checkbox" name="isDeveloper" checked={form.isDeveloper === false} value={false} onChange={handle} />
                                 </label>
                             </div>
                         </div>

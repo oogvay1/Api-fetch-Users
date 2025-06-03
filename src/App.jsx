@@ -27,16 +27,7 @@ function App() {
   let [loadi, setLoadi] = useState(true);
 
 
-  let [form, setForm] = useState({
-    id: 0,
-    name: '',
-    title: '',
-    lastname: '',
-    age: '',
-    gender: '',
-    country: '',
-    isDeveloper: false,
-  });
+  let [form, setForm] = useState(newUserr);
 
   let [info, setInfo] = useState(newUserr);
 
@@ -113,6 +104,7 @@ function App() {
 
     setData(prev => [...prev, user]);
     setForm(newUserr);
+    alert(isDeveloper)
   }
 
   const deleteUser = async (id) => {
@@ -146,6 +138,7 @@ function App() {
   }
 
   if (error) {
+    setForm(newUserr);
     return <>
       <header className="main-header">
         <div className="header-wrapper">
@@ -180,16 +173,12 @@ function App() {
       age: data.age || '',
       gender: data.gender || '',
       country: data.country || '',
-      isDeveloper: Boolean(data.isDeveloper) || false,
+      isDeveloper: Boolean(data.isDeveloper)
     });
 
     setEditingId(id);
     setEsc(true);
   };
-
-  useEffect(() => {
-    
-  })
 
   const findUser = async (id) => {
     if (!id) return;
@@ -208,6 +197,7 @@ function App() {
       isDeveloper: Boolean(data.isDeveloper)
     });
     console.log(data.isDeveloper);
+    setEditingId(0)
   };
 
   info && console.log(info)
@@ -224,6 +214,7 @@ function App() {
           editingId={editingId}
           setForm={setForm}
           newForm={newUserr}
+          setEditingId={setEditingId}
         />
       )}
 

@@ -27,9 +27,35 @@ html {
 
 .main-header {
     width: 100%;
-    z-index: 999;
+    z-index: 9999;
+    margin-bottom: 1.5px;
     backdrop-filter: blur(4px);
     background-color: #99999912;
+}
+
+.main-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right,
+            #ff3c7e,
+            /* bold pink */
+            #2bb9ff,
+            /* vibrant sky blue */
+            #ff66c4,
+            /* hot candy pink */
+            #3effb9,
+            /* neon mint green */
+            #b26bff
+            /* vivid purple */
+        );
+    filter: blur(2px);
+    opacity: 0.9;
+    z-index: 9999;
+    pointer-events: none;
 }
 
 .header-wrapper {
@@ -40,8 +66,6 @@ html {
     margin: 0 auto;
     width: 100%;
     max-width: 1500px;
-    margin: 0 auto;
-    width: 100%;
 }
 
 .change-url {
@@ -150,6 +174,7 @@ html {
     max-width: 1600px;
     margin: 0 auto;
     width: 100%;
+    z-index: 2;
 }
 
 .delete-btn {
@@ -186,17 +211,16 @@ html {
     align-content: end;
     overflow: hidden;
     position: sticky;
-    z-index: 1;
 }
 
 .ul-list {
     width: 600px;
-    height: 654.5px;
+    height: 653px;
     overflow-y: scroll;
     display: flex;
     padding: 26px;
     gap: 21px;
-    z-index: 999;
+    z-index: 10;
     scroll-behavior: smooth;
     background-color: #202020;
     flex-direction: column;
